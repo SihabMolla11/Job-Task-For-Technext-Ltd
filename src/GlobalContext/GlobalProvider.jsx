@@ -7,8 +7,9 @@ const GlobalProvider = ({ children }) => {
   const [allData, setAllData] = useState([]);
   const [rockets, setRockets] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filterByStatus, setFilterByStatus] = useState([]);
   const [status, setStatus] = useState(null);
+  const [isUpcoming, setIsUpcoming] = useState(false);
+  const [findByLaunchingDate, setFindByLaunchingDate] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -18,24 +19,21 @@ const GlobalProvider = ({ children }) => {
     });
   }, []);
 
-  
-
   useEffect(() => {
-    if (status === null) {
+    if (status === null && findByLaunchingDate === null && isUpcoming === false) {
       setRockets(allData);
     } else if (status === false || status === true) {
       const statusFiltering = allData.filter((data) => data?.launch_success === status);
       setRockets(statusFiltering);
+    } else if (isUpcoming === true) {
+      const upComingRockets = allData.filter((data) => data?.upcoming === true);
+      setRockets(upComingRockets);
     }
-  }, [status, setRockets, allData]);
+  }, [status, setRockets, allData, findByLaunchingDate, isUpcoming]);
 
+  const contextInfo = { allData, rockets, loading, setStatus, setFindByLaunchingDate, setIsUpcoming };
 
-
-
-
-
-
-  const contextInfo = { allData, rockets, loading, setStatus };
+  console.log(isUpcoming);
 
   return <GlobalContext.Provider value={contextInfo}>{children}</GlobalContext.Provider>;
 };

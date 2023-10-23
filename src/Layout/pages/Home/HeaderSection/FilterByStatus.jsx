@@ -14,7 +14,7 @@ const FilterByStatus = () => {
         type="button"
         className={`border px-2 h-10 w-full flex rounded-md items-center justify-between cursor-pointer text-[#6C757D] ${openStatusByFilter ? "border-4 border-[#86B7FE]" : "border-[#CED4DA]"}`}
       >
-        <span>By Launch Date</span> {openStatusByFilter ? <GoDash /> : <BiChevronDown />}
+        <span>By Launch Status</span> {openStatusByFilter ? <GoDash /> : <BiChevronDown />}
       </button>
       {openStatusByFilter && (
         <ul className="absolute border border-black w-full z-30 bg-white ">
