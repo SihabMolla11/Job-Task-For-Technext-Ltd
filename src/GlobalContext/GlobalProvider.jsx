@@ -12,6 +12,10 @@ const GlobalProvider = ({ children }) => {
   const [findByLaunchingDate, setFindByLaunchingDate] = useState(null);
   const [searchText, setSearchText] = useState("");
 
+  const handelSetSessionStorage = (event) => {
+    sessionStorage.setItem("pageNumber", event);
+  };
+
   useEffect(() => {
     setLoading(true);
     axios.get("https://api.spacexdata.com/v3/launches").then((res) => {
@@ -43,7 +47,7 @@ const GlobalProvider = ({ children }) => {
     }
   }, [status, setRockets, allData, findByLaunchingDate, isUpcoming, searchText]);
 
-  const contextInfo = { allData, rockets, loading, status, setStatus, setFindByLaunchingDate, setIsUpcoming, setSearchText };
+  const contextInfo = { allData, rockets, loading, status, setStatus, setFindByLaunchingDate, setIsUpcoming, setSearchText, handelSetSessionStorage };
 
   return <GlobalContext.Provider value={contextInfo}>{children}</GlobalContext.Provider>;
 };

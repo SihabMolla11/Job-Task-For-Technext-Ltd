@@ -6,12 +6,13 @@ import { GlobalContext } from "../../../../GlobalContext/GlobalProvider";
 const FilterByDate = () => {
   const [openDateByFilter, setOpenDateByFilter] = useState(false);
   const [date, setDate] = useState(null);
-  const { setStatus, setFindByLaunchingDate, setIsUpcoming } = useContext(GlobalContext);
+  const { setStatus, setFindByLaunchingDate, setIsUpcoming, handelSetSessionStorage } = useContext(GlobalContext);
 
   const handelFilterByDate = (event) => {
     setStatus(null);
     setIsUpcoming(false);
     setDate(event);
+    handelSetSessionStorage(1);
     if (event) {
       const currentDate = new Date();
       const sevenDaysAgo = new Date(currentDate);
@@ -33,32 +34,33 @@ const FilterByDate = () => {
 
   return (
     <div className="w-full relative">
-      <button
-        onClick={() => setOpenDateByFilter(!openDateByFilter)}
-        type="button"
-        className={`border px-2 h-10 w-full flex rounded-md items-center justify-between cursor-pointer text-[#6C757D] ${openDateByFilter ? "border-4 border-[#86B7FE]" : "border-[#CED4DA]"}`}
-      >
+      <button onClick={() => setOpenDateByFilter(!openDateByFilter)} type="button" className={` filter border ${openDateByFilter ? "border-4 border-[#86B7FE]" : "border-[#CED4DA]"}`}>
         <span>By Launch Date</span> {openDateByFilter ? <GoDash /> : <BiChevronDown />}
       </button>
       {openDateByFilter && (
-        <ul className="absolute border border-black w-full z-40 bg-white space-y-1">
+        <ul className="filter-container">
           <li>
-            <button className={`cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start ${date === 7 && "bg-[#a7c3ee63]"}`} type="button" onClick={() => handelFilterByDate(7)}>
+            <button className={`filter-button ${date === 7 && "bg-[#a7c3ee63]"}`} type="button" onClick={() => handelFilterByDate(7)}>
               Last week
             </button>
           </li>
           <li>
-            <button className={`cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start ${date === 30 && "bg-[#a7c3ee63]"}`} type="button" onClick={() => handelFilterByDate(30)}>
+            <button className={`filter-button ${date === 30 && "bg-[#a7c3ee63]"}`} type="button" onClick={() => handelFilterByDate(30)}>
               Last Month
             </button>
           </li>
           <li>
-            <button className={`cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start ${date === 365 && "bg-[#a7c3ee63]"}`} type="button" onClick={() => handelFilterByDate(365)}>
+            <button className={`filter-button ${date === 365 && "bg-[#a7c3ee63]"}`} type="button" onClick={() => handelFilterByDate(365)}>
               Last Year
             </button>
           </li>
           <li>
-            <button className={`cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start ${!date && "bg-[#a7c3ee63]"}`} type="button" onClick={() => handelFilterByDate(null)}>
+            <button className={`filter-button ${date === 2191 && "bg-[#a7c3ee63]"}`} type="button" onClick={() => handelFilterByDate(2191)}>
+              Last Six Year
+            </button>
+          </li>
+          <li>
+            <button className={`filter-button ${!date && "bg-[#a7c3ee63]"}`} type="button" onClick={() => handelFilterByDate(null)}>
               All Rocket
             </button>
           </li>

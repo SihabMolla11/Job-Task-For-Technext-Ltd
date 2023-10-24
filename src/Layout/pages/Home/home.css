@@ -1,13 +1,13 @@
 .MuiPagination-ul {
-  border: 1px solid #dee2e6;
+  border: 1px solid #dee2e6 !important;
   border-radius: 4px;
   display: flex;
   padding: 0 !important;
 }
 
 .MuiPagination-ul li button {
-  border-right: 1px solid #dee2e6;
-  border-left: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6 !important;
+  border-left: 1px solid #dee2e6 !important;
   height: 32px;
   margin: 0 !important;
   padding: 0 !important;

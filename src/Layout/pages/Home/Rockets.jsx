@@ -1,10 +1,10 @@
 import Pagination from "@mui/material/Pagination";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../../GlobalContext/GlobalProvider";
 import "./home.css";
 
 const Rockets = () => {
-  const { rockets, loading } = useContext(GlobalContext);
+  const { rockets, loading, handelSetSessionStorage } = useContext(GlobalContext);
   const [currentPage, setCurrentPage] = useState(1);
   const rocketsPerPage = 9;
 
@@ -15,7 +15,17 @@ const Rockets = () => {
 
   const handlePageChange = (event, page) => {
     setCurrentPage(page);
+    handelSetSessionStorage(page);
   };
+
+  useEffect(() => {
+    const page = sessionStorage.getItem("pageNumber");
+    if (page) {
+      setCurrentPage(parseInt(page));
+    } else {
+      setCurrentPage(1);
+    }
+  }, []);
 
   if (loading) {
     return <p>Loading........</p>;

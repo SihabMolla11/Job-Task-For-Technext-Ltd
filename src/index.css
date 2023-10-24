@@ -3,5 +3,17 @@
 @tailwind utilities;
 
 .my-container {
-  @apply max-w-[1800px] px-4 md:px-20 lg:px-24 xl:px-40 mx-auto;
+  @apply max-w-[1800px] px-4 md:px-20 lg:px-24 mx-auto;
+}
+
+.filter {
+  @apply px-2 h-10 w-full flex rounded-md items-center justify-between cursor-pointer text-[#6C757D];
+}
+
+.filter-button {
+  @apply cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start;
+}
+
+.filter-container {
+  @apply absolute border border-black w-full z-30 bg-white space-y-1;
 }

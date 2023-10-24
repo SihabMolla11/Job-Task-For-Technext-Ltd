@@ -2,11 +2,12 @@ import { useContext } from "react";
 import { GlobalContext } from "../../../../GlobalContext/GlobalProvider";
 
 const UpComingFilter = () => {
-  const { setStatus, setFindByLaunchingDate, setIsUpcoming } = useContext(GlobalContext);
+  const { setStatus, setFindByLaunchingDate, setIsUpcoming, handelSetSessionStorage } = useContext(GlobalContext);
 
   const handelUpComing = (event) => {
     setStatus(null);
     setFindByLaunchingDate(null);
+    handelSetSessionStorage(1);
     setIsUpcoming(event);
   };
 
