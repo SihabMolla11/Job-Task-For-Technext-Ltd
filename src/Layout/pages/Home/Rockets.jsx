@@ -1,5 +1,6 @@
 import Pagination from "@mui/material/Pagination";
 import { useContext, useEffect, useState } from "react";
+import Loading from "../../../Components/Loading";
 import { GlobalContext } from "../../../GlobalContext/GlobalProvider";
 import "./home.css";
 
@@ -28,7 +29,7 @@ const Rockets = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading........</p>;
+    return <Loading />;
   }
 
   return (
