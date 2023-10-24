@@ -10,6 +10,7 @@ const GlobalProvider = ({ children }) => {
   const [status, setStatus] = useState(null);
   const [isUpcoming, setIsUpcoming] = useState(false);
   const [findByLaunchingDate, setFindByLaunchingDate] = useState(null);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -20,7 +21,7 @@ const GlobalProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (status === null && findByLaunchingDate === null && isUpcoming === false) {
+    if (status === null && findByLaunchingDate === null && isUpcoming === false && !searchText) {
       setRockets(allData);
     } else if (status === false || status === true) {
       const statusFiltering = allData.filter((data) => data?.launch_success === status);
@@ -28,12 +29,21 @@ const GlobalProvider = ({ children }) => {
     } else if (isUpcoming === true) {
       const upComingRockets = allData.filter((data) => data?.upcoming === true);
       setRockets(upComingRockets);
+    } else if (findByLaunchingDate) {
+      const filterByDate = allData.filter((data) => new Date(data.launch_date_local) >= new Date(findByLaunchingDate));
+      setRockets(filterByDate);
+    } else if (searchText) {
+      const searchRocket = allData.filter((data) => {
+        const rocketName = data?.rocket?.rocket_name;
+        if (rocketName) {
+          return rocketName.toLowerCase().includes(searchText);
+        }
+      });
+      setRockets(searchRocket);
     }
-  }, [status, setRockets, allData, findByLaunchingDate, isUpcoming]);
+  }, [status, setRockets, allData, findByLaunchingDate, isUpcoming, searchText]);
 
-  const contextInfo = { allData, rockets, loading, setStatus, setFindByLaunchingDate, setIsUpcoming };
-
-  console.log(isUpcoming);
+  const contextInfo = { allData, rockets, loading, setStatus, setFindByLaunchingDate, setIsUpcoming, setSearchText };
 
   return <GlobalContext.Provider value={contextInfo}>{children}</GlobalContext.Provider>;
 };

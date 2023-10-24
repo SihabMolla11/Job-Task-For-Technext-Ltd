@@ -7,6 +7,22 @@ const FilterByDate = () => {
   const [openDateByFilter, setOpenDateByFilter] = useState(false);
   const { setFindByLaunchingDate } = useContext(GlobalContext);
 
+  const handelFilterByDate = (event) => {
+    const currentDate = new Date();
+    const sevenDaysAgo = new Date(currentDate);
+    sevenDaysAgo.setDate(currentDate.getDate() - event);
+    const year = sevenDaysAgo.getFullYear();
+    const month = sevenDaysAgo.getMonth() + 1;
+    const day = sevenDaysAgo.getDate();
+    const hours = sevenDaysAgo.getHours();
+    const minutes = sevenDaysAgo.getMinutes();
+    const seconds = sevenDaysAgo.getSeconds();
+
+    const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")} ${hours}:${minutes}:${seconds}`;
+
+    setFindByLaunchingDate(formattedDate);
+  };
+
   return (
     <div className="w-full relative">
       <button
@@ -19,17 +35,17 @@ const FilterByDate = () => {
       {openDateByFilter && (
         <ul className="absolute border border-black w-full z-40 bg-white">
           <li>
-            <button className="cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start" type="button" onClick={() => setFindByLaunchingDate("lastWeek")}>
+            <button className="cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start" type="button" onClick={() => handelFilterByDate(7)}>
               Last week
             </button>
           </li>
           <li>
-            <button className="cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start" type="button" onClick={() => setFindByLaunchingDate("lastMonth")}>
+            <button className="cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start" type="button" onClick={() => handelFilterByDate(30)}>
               Last Month
             </button>
           </li>
           <li>
-            <button className="cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start" type="button" onClick={() => setFindByLaunchingDate("lastYear")}>
+            <button className="cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start" type="button" onClick={() => handelFilterByDate(365)}>
               Last Year
             </button>
           </li>
