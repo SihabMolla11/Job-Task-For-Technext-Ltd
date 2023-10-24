@@ -5,7 +5,7 @@ import UpComingFilter from "./UpComingFilter";
 
 const HeaderSection = () => {
   return (
-    <div className=" mt-24 flex flex-col md:flex-row justify-between md:items-end gap-6">
+    <div className=" mt-16 flex flex-col md:flex-row justify-between md:items-end gap-6">
       <div className=" w-full md:w-[60%]">
         <SearchBar />
       </div>

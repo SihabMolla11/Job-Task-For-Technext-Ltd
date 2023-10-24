@@ -17,3 +17,7 @@
 .filter-container {
   @apply absolute border border-black w-full z-30 bg-white space-y-1;
 }
+
+.link-button {
+  @apply p-2 text-lg font-semibold text-white rounded-md;
+}

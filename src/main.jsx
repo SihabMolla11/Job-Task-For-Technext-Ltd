@@ -3,20 +3,25 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import GlobalProvider from "./GlobalContext/GlobalProvider";
 import Main from "./Layout/Main";
-import "./index.css";
 import Home from "./Layout/pages/Home/Home";
+import RocketDetail from "./Layout/pages/RocketDetail/RocketDetail";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
     errorElement: <p>This is error</p>,
-    children:[
+    children: [
       {
         path: "/",
-        element:<Home/>
-      }
-    ]
+        element: <Home />,
+      },
+      {
+        path: "rocket/:id",
+        element: <RocketDetail />,
+      },
+    ],
   },
 ]);
 

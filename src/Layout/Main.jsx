@@ -1,10 +1,9 @@
-
-import Home from "./pages/Home/Home";
+import { Outlet } from "react-router-dom";
 
 const Main = () => {
   return (
     <div className=" my-container">
-      <Home/>
+      <Outlet />
     </div>
   );
 };
