@@ -9,7 +9,7 @@ const HeaderSection = () => {
       <div className=" w-full md:w-[60%]">
         <SearchBar />
       </div>
-      <div className="w-full md:w-[40%]">
+      <div className="w-full lg:w-[40%]">
         <UpComingFilter />
         <div className="flex flex-col md:flex-row gap-4 mt-4">
           <FilterByStatus />

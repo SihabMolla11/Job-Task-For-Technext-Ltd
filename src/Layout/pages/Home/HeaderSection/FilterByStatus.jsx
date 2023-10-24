@@ -4,8 +4,13 @@ import { GoDash } from "react-icons/go";
 import { GlobalContext } from "../../../../GlobalContext/GlobalProvider";
 
 const FilterByStatus = () => {
-  const { setStatus } = useContext(GlobalContext);
+  const { setStatus, setFindByLaunchingDate, setIsUpcoming, status } = useContext(GlobalContext);
   const [openStatusByFilter, setOpenStatusByFilter] = useState(false);
+  const handelStatusFilter = (event) => {
+    setFindByLaunchingDate(null);
+    setIsUpcoming(false);
+    setStatus(event);
+  };
 
   return (
     <div className="w-full relative">
@@ -17,15 +22,20 @@ const FilterByStatus = () => {
         <span>By Launch Status</span> {openStatusByFilter ? <GoDash /> : <BiChevronDown />}
       </button>
       {openStatusByFilter && (
-        <ul className="absolute border border-black w-full z-30 bg-white ">
+        <ul className="absolute border border-black w-full z-30 bg-white space-y-1">
           <li>
-            <button className="cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start" type="button" onClick={() => setStatus(true)}>
-              Success
+            <button className={`cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start ${status === true && "bg-[#a7c3ee63]"}`} type="button" onClick={() => handelStatusFilter(true)}>
+              Success Rocket
             </button>
           </li>
           <li>
-            <button className="cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start" type="button" onClick={() => setStatus(false)}>
-              Failed
+            <button className={`cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start ${status === false && "bg-[#a7c3ee63]"}`} type="button" onClick={() => handelStatusFilter(false)}>
+              Failed Rocket
+            </button>
+          </li>
+          <li>
+            <button className={`cursor-pointer hover:bg-[#a7c3ee63] px-2 w-full text-start ${status === null && "bg-[#a7c3ee63]"}`} type="button" onClick={() => handelStatusFilter(null)}>
+              All Rocket
             </button>
           </li>
         </ul>

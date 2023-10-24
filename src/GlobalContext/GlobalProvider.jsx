@@ -21,9 +21,7 @@ const GlobalProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (status === null && findByLaunchingDate === null && isUpcoming === false && !searchText) {
-      setRockets(allData);
-    } else if (status === false || status === true) {
+    if (status === false || status === true) {
       const statusFiltering = allData.filter((data) => data?.launch_success === status);
       setRockets(statusFiltering);
     } else if (isUpcoming === true) {
@@ -40,10 +38,12 @@ const GlobalProvider = ({ children }) => {
         }
       });
       setRockets(searchRocket);
+    } else {
+      setRockets(allData);
     }
   }, [status, setRockets, allData, findByLaunchingDate, isUpcoming, searchText]);
 
-  const contextInfo = { allData, rockets, loading, setStatus, setFindByLaunchingDate, setIsUpcoming, setSearchText };
+  const contextInfo = { allData, rockets, loading, status, setStatus, setFindByLaunchingDate, setIsUpcoming, setSearchText };
 
   return <GlobalContext.Provider value={contextInfo}>{children}</GlobalContext.Provider>;
 };

@@ -2,11 +2,17 @@ import { useContext } from "react";
 import { GlobalContext } from "../../../../GlobalContext/GlobalProvider";
 
 const UpComingFilter = () => {
-  const { setIsUpcoming } = useContext(GlobalContext);
+  const { setStatus, setFindByLaunchingDate, setIsUpcoming } = useContext(GlobalContext);
+
+  const handelUpComing = (event) => {
+    setStatus(null);
+    setFindByLaunchingDate(null);
+    setIsUpcoming(event);
+  };
 
   return (
     <div className="md:text-end">
-      <input onChange={(e) => setIsUpcoming(e.target.checked)} type="checkbox" id="upcoming" />
+      <input onChange={(e) => handelUpComing(e.target.checked)} type="checkbox" id="upcoming" />
       <label htmlFor="upcoming" className="text-[#212529] ml-2">
         Show upcoming only
       </label>
