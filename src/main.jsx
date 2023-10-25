@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import GlobalProvider from "./GlobalContext/GlobalProvider";
 import Main from "./Layout/Main";
+import PrivateRoute from "./Layout/PrivateRoute";
 import ErrorPage from "./Layout/pages/ErrorPage";
 import Home from "./Layout/pages/Home/Home";
 import Login from "./Layout/pages/Login/Login";
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
       },
       {
         path: "rocket/:id",
-        element: <RocketDetail />,
+        element: (
+          <PrivateRoute>
+            <RocketDetail />
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",

@@ -5,17 +5,14 @@ import Loading from "../../../Components/Loading";
 import { GlobalContext } from "../../../GlobalContext/GlobalProvider";
 
 const RocketDetail = () => {
+  const { rockets, fetchLoading } = useContext(GlobalContext);
+
   const params = useParams();
   const id = parseInt(params?.id);
-  const { rockets, loading } = useContext(GlobalContext);
   const rocket = rockets?.find((rocket) => rocket?.launch_date_unix === id);
 
-  if (loading) {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+  if (fetchLoading) {
+    return <Loading />;
   }
   return (
     <div className="mt-20">

@@ -3,7 +3,7 @@ import Lottie from "lottie-react";
 import { useContext } from "react";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleLogin from "../../../Components/GoogleLogin";
 import { GlobalContext } from "../../../GlobalContext/GlobalProvider";
 import loginAnimation from "../../../assets/animation/login.json";
@@ -11,6 +11,8 @@ import loginAnimation from "../../../assets/animation/login.json";
 const Login = () => {
   const { loading, setLoading, loginUser, user } = useContext(GlobalContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
 
   const handelLogin = (event) => {
     event.preventDefault();
@@ -19,7 +21,7 @@ const Login = () => {
     loginUser(email, password)
       .then(() => {
         toast.success("login Successful");
-        navigate("/");
+        navigate(from, { replace: true });
         setLoading(false);
       })
       .catch((error) => {

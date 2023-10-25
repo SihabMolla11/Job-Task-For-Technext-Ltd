@@ -1,12 +1,13 @@
 import Pagination from "@mui/material/Pagination";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import EmptyMessage from "../../../Components/EmptyMessage";
 import Loading from "../../../Components/Loading";
 import { GlobalContext } from "../../../GlobalContext/GlobalProvider";
 import "./home.css";
 
 const Rockets = () => {
-  const { rockets, loading, handelSetSessionStorage } = useContext(GlobalContext);
+  const { rockets, loading, fetchLoading, handelSetSessionStorage } = useContext(GlobalContext);
   const [currentPage, setCurrentPage] = useState(1);
   const rocketsPerPage = 9;
 
@@ -29,8 +30,12 @@ const Rockets = () => {
     }
   }, []);
 
-  if (loading) {
+  if (loading || fetchLoading) {
     return <Loading />;
+  }
+
+  if (currentRockets.length === 0) {
+    return <EmptyMessage />;
   }
 
   return (

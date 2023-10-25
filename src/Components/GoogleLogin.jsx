@@ -1,12 +1,15 @@
 import { useContext } from "react";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../GlobalContext/GlobalProvider";
 
 const GoogleLogin = () => {
   const { loading, setLoading, googleLogin, user } = useContext(GlobalContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location?.state?.from?.pathname || "/";
 
   const handelGoogleLogin = () => {
     setLoading(true);
@@ -14,7 +17,7 @@ const GoogleLogin = () => {
       .then(() => {
         toast.success("login Successfully");
         setLoading(false);
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);

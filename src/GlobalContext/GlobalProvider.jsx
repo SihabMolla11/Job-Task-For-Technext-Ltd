@@ -10,6 +10,7 @@ const GlobalProvider = ({ children }) => {
   const [allData, setAllData] = useState([]);
   const [rockets, setRockets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [fetchLoading, setFetchLoading] = useState(true);
   const [status, setStatus] = useState(null);
   const [isUpcoming, setIsUpcoming] = useState(false);
   const [findByLaunchingDate, setFindByLaunchingDate] = useState(null);
@@ -50,8 +51,8 @@ const GlobalProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
       console.log(currentUser);
+      setLoading(false);
     });
     return () => {
       return unsubscribe();
@@ -59,14 +60,15 @@ const GlobalProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    setLoading(true);
+    setFetchLoading(true);
     axios.get("https://api.spacexdata.com/v3/launches").then((res) => {
       setAllData(res?.data);
-      setLoading(false);
+      setFetchLoading(false);
     });
   }, []);
 
   useEffect(() => {
+    setFetchLoading(true);
     if (status === false || status === true) {
       const statusFiltering = allData.filter((data) => data?.launch_success === status);
       setRockets(statusFiltering);
@@ -87,6 +89,7 @@ const GlobalProvider = ({ children }) => {
     } else {
       setRockets(allData);
     }
+    setFetchLoading(false);
   }, [status, setRockets, allData, findByLaunchingDate, isUpcoming, searchText]);
 
   const contextInfo = {
@@ -95,6 +98,7 @@ const GlobalProvider = ({ children }) => {
     rockets,
     loading,
     status,
+    fetchLoading,
     setLoading,
     setStatus,
     setFindByLaunchingDate,

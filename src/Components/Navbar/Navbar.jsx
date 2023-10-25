@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import { HiMenuAlt2 } from "react-icons/hi";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { GlobalContext } from "../../GlobalContext/GlobalProvider";
 
 const Navbar = () => {
@@ -23,7 +23,7 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      { !user ? (
+      {!user ? (
         <>
           <li>
             <NavLink className="hover:border-b border-white" to="/login">
@@ -57,15 +57,15 @@ const Navbar = () => {
       )}
 
       <div className="space-x-3">
-        <h2 className="font-bold text-xl md:text-3xl">
-          <span className="text-[#0AF8FF]">Space</span> Curiosity
-        </h2>
+        <Link to="/">
+          <h2 className="font-bold text-xl md:text-3xl">
+            <span className="text-[#0AF8FF]">Space</span> Curiosity
+          </h2>
+        </Link>
       </div>
       <div className=" items-center gap-6 flex">
         <ul className=" hidden md:flex items-center gap-4 font-semibold text-lg ">{navItems}</ul>
-        <div className="">
-          <FaUserAlt className="text-2xl cursor-pointer" />
-        </div>
+        <div>{user ? <img src={user?.photoURL} alt="user Image" className="w-12 rounded-full border-2 border-white" /> : <FaUserAlt className="text-2xl cursor-pointer" />}</div>
         <div>
           <ul className={`absolute top-[68px] bg-[#000000d2] w-40 font-semibold p-4 space-y-2 rounded-br-md ease-in-out duration-300 ${isOpen ? "left-0" : "-left-52"}`}>{navItems}</ul>
         </div>
