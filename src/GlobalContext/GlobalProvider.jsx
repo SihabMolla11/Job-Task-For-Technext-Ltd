@@ -51,7 +51,6 @@ const GlobalProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser);
       setLoading(false);
     });
     return () => {
@@ -63,7 +62,6 @@ const GlobalProvider = ({ children }) => {
     setFetchLoading(true);
     axios.get("https://api.spacexdata.com/v3/launches").then((res) => {
       setAllData(res?.data);
-      setFetchLoading(false);
     });
   }, []);
 
