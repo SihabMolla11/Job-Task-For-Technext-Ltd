@@ -3,6 +3,7 @@ import { HiOutlineRocketLaunch } from "react-icons/hi2";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../../../Components/Loading";
 import { GlobalContext } from "../../../GlobalContext/GlobalProvider";
+import useTitle from "../../../hooks/useTitle";
 
 const RocketDetail = () => {
   const { rockets, fetchLoading } = useContext(GlobalContext);
@@ -10,6 +11,8 @@ const RocketDetail = () => {
   const params = useParams();
   const id = parseInt(params?.id);
   const rocket = rockets?.find((rocket) => rocket?.launch_date_unix === id);
+
+  useTitle(rocket?.rocket?.rocket_name);
 
   if (fetchLoading) {
     return <Loading />;

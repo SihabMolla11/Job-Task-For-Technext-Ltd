@@ -4,12 +4,11 @@ import { GoDash } from "react-icons/go";
 import { GlobalContext } from "../../../../GlobalContext/GlobalProvider";
 
 const FilterByStatus = () => {
-  const { setStatus, setFindByLaunchingDate, setIsUpcoming, status, handelSetSessionStorage } = useContext(GlobalContext);
+  const { setStatus, setFindByLaunchingDate, setIsUpcoming, status } = useContext(GlobalContext);
   const [openStatusByFilter, setOpenStatusByFilter] = useState(false);
   const handelStatusFilter = (event) => {
     setFindByLaunchingDate(null);
     setIsUpcoming(false);
-    handelSetSessionStorage(1);
     setStatus(event);
   };
 

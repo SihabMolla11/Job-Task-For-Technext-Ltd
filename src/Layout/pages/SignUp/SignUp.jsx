@@ -8,8 +8,11 @@ import GoogleLogin from "../../../Components/GoogleLogin";
 import { GlobalContext } from "../../../GlobalContext/GlobalProvider";
 import loginAnimation from "../../../assets/animation/login.json";
 import { uploadImage } from "../../../hooks/uploadImage";
+import useTitle from "../../../hooks/useTitle";
 
 const SignUp = () => {
+  useTitle("Sign Up");
+
   const { loading, createUser, profileUpdate, setLoading, user } = useContext(GlobalContext);
 
   const navigate = useNavigate();

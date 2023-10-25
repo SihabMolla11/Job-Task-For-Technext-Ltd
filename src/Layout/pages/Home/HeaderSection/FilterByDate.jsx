@@ -6,13 +6,12 @@ import { GlobalContext } from "../../../../GlobalContext/GlobalProvider";
 const FilterByDate = () => {
   const [openDateByFilter, setOpenDateByFilter] = useState(false);
   const [date, setDate] = useState(null);
-  const { setStatus, setFindByLaunchingDate, setIsUpcoming, handelSetSessionStorage } = useContext(GlobalContext);
+  const { setStatus, setFindByLaunchingDate, setIsUpcoming,  } = useContext(GlobalContext);
 
   const handelFilterByDate = (event) => {
     setStatus(null);
     setIsUpcoming(false);
     setDate(event);
-    handelSetSessionStorage(1);
     if (event) {
       const currentDate = new Date();
       const sevenDaysAgo = new Date(currentDate);

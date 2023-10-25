@@ -7,8 +7,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleLogin from "../../../Components/GoogleLogin";
 import { GlobalContext } from "../../../GlobalContext/GlobalProvider";
 import loginAnimation from "../../../assets/animation/login.json";
+import useTitle from "../../../hooks/useTitle";
 
 const Login = () => {
+  useTitle("Login");
+
   const { loading, setLoading, loginUser, user } = useContext(GlobalContext);
   const navigate = useNavigate();
   const location = useLocation();

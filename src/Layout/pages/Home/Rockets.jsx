@@ -34,7 +34,7 @@ const Rockets = () => {
     return <Loading />;
   }
 
-  if (currentRockets.length === 0) {
+  if (rockets.length === 0) {
     return <EmptyMessage />;
   }
 
