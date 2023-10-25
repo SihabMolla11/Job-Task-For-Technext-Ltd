@@ -65,7 +65,7 @@ const Navbar = () => {
       </div>
       <div className=" items-center gap-6 flex">
         <ul className=" hidden md:flex items-center gap-4 font-semibold text-lg ">{navItems}</ul>
-        <div>{user ? <img src={user?.photoURL} alt="user Image" className="w-12 rounded-full border-2 border-white" /> : <FaUserAlt className="text-2xl cursor-pointer" />}</div>
+        <div>{user ? <img src={user?.photoURL} alt="user Image" className="w-12 h-12 rounded-full border-2 border-white" /> : <FaUserAlt className="text-2xl cursor-pointer" />}</div>
         <div>
           <ul className={`absolute top-[68px] bg-[#000000d2] w-40 font-semibold p-4 space-y-2 rounded-br-md ease-in-out duration-300 ${isOpen ? "left-0" : "-left-52"}`}>{navItems}</ul>
         </div>

@@ -1,8 +1,27 @@
-# React + Vite
+# Space Curiosity
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
 
-Currently, two official plugins are available:
+* When user Will came in this website user can see a Nav bar. In navbar user will find website's name, menu items and user abater.
+* After navbar user will see title and description of the website.
+* Then user Will find a Filtering section. In this Filtering section User can see search bar, Filter by Lunch Status, Filter by Lunch Date.
+* After filtering section user can see all rockets of the website.
+* Then user can see a pagination option.
+* User can Login from Login page and Sign up From Sign up.
+* When User click on any any rocket the user will go to rocket detail page.
+* For got to rocket detail page User must be login.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Installed packages and library
+* React-router-dom for routing.
+* Tailwind css for Style.
+* React-icons for icons.
+* Material UI For Pagination.
+* Firebase for authentication.
+* React-hot-toast for showing alert.
+* Thew website deploy in Netlify.
+
+
+
+
+## [Space Curiosity Live Link](https://space-curiosity005.netlify.app)
