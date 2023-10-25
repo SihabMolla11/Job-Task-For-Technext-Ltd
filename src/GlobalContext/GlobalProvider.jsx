@@ -1,7 +1,10 @@
 import axios from "axios";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
+import { auth } from "../firebase/firebase";
 
 export const GlobalContext = createContext(null);
+const googleProvider = new GoogleAuthProvider();
 
 const GlobalProvider = ({ children }) => {
   const [allData, setAllData] = useState([]);
@@ -11,10 +14,49 @@ const GlobalProvider = ({ children }) => {
   const [isUpcoming, setIsUpcoming] = useState(false);
   const [findByLaunchingDate, setFindByLaunchingDate] = useState(null);
   const [searchText, setSearchText] = useState("");
+  const [user, setUser] = useState(null);
 
   const handelSetSessionStorage = (event) => {
     sessionStorage.setItem("pageNumber", event);
   };
+
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const loginUser = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const profileUpdate = async (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
+
+  const googleLogin = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
+
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+      console.log(currentUser);
+    });
+    return () => {
+      return unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -47,7 +89,24 @@ const GlobalProvider = ({ children }) => {
     }
   }, [status, setRockets, allData, findByLaunchingDate, isUpcoming, searchText]);
 
-  const contextInfo = { allData, rockets, loading, status, setStatus, setFindByLaunchingDate, setIsUpcoming, setSearchText, handelSetSessionStorage };
+  const contextInfo = {
+    user,
+    allData,
+    rockets,
+    loading,
+    status,
+    setLoading,
+    setStatus,
+    setFindByLaunchingDate,
+    setIsUpcoming,
+    setSearchText,
+    handelSetSessionStorage,
+    createUser,
+    loginUser,
+    profileUpdate,
+    googleLogin,
+    logOut,
+  };
 
   return <GlobalContext.Provider value={contextInfo}>{children}</GlobalContext.Provider>;
 };
