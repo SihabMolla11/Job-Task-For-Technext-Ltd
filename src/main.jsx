@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import GlobalProvider from "./GlobalContext/GlobalProvider";
 import Main from "./Layout/Main";
+import ErrorPage from "./Layout/pages/ErrorPage";
 import Home from "./Layout/pages/Home/Home";
 import Login from "./Layout/pages/Login/Login";
 import RocketDetail from "./Layout/pages/RocketDetail/RocketDetail";
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
-    errorElement: <p>This is error</p>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
